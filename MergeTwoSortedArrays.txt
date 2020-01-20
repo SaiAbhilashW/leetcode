@@ -1,0 +1,43 @@
+class Solution {
+    public void merge(int[] nums1, int m, int[] nums2, int n) {
+        /* 1 : append all nums2 elements in nums1 and then sort nums1
+        *      O(n) + O(nlogn) time
+        *
+        *  2 : Because arrays are sorted, take element from nums2 and place 
+        *      in nums1 and shift the bigger nums to right
+        *      Best case: all elements of nums2 > nums1 -> O(n)
+        *      Worst case: all elements of nums2 < nums1 -> O(mn)
+        *
+        *  3 : Traverse over nums1 array, place each element of nums2 after comparision and 
+        *      place the replaced element in nums1 at the end of array.
+        *      E.g. 10 50 70 _ _ _ , 20 30 60 -> 10 20 70 50 _ _ , _ 30 60 and so on
+        *      O(nm) time 
+        *  
+        *  4 : Start filling bigger array with smaller array elements from the last, so whichever               *      elements in bigger array are untouched are already sorted.
+        *      E.g. 10 50 70 _ _ _ , 20 30 60 -> 10 50 _ _ _ 70, 20 30 60 -> 10 50 _ _ 60 70, 20 30 _
+        *      -> 10 _ _ 50 60 70, 20 30 _ -> 10 _ 30 50 60 70, 20 _ _ -> 10 20 30 50 60 70, _ _ _ 
+        *      O(n) time 
+        */
+        
+        //using 4
+        int target = m + n - 1;
+        int i = n - 1;
+        int j = m - 1;
+        
+        while(i >= 0){
+            if(j >= 0 && nums1[j] > nums2[i]){
+                nums1[target] = nums1[j]; j--;target--;
+            }
+            else {
+                nums1[target] = nums2[i]; i--;target--;
+            }
+            
+        }
+        
+        
+    }
+}
+
+/*Learnings : 
+if(a[i]>b[i] && i != -1) -> a>b is checked first, if there is any error like arrayOutOfBounds for a[i] then compiler stops there only. So in such cases : if(i!= -1 && a[i] > b[i]) is correct way of writing it.
+*/

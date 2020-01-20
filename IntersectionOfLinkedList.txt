@@ -1,0 +1,82 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) {
+ *         val = x;
+ *         next = null;
+ *     }
+ * }
+
+ - Find the node where the two linked list intersect.
+  e.g. 1-2-5-8-9
+           |
+       4-3-7
+
+       So intersection is at 5.
+
+ */
+public class Solution {
+    
+    /*
+        1. Start from head1, Store all elements in a list. Do same for head2
+        2. compare two lists starting from behind, return the last common node
+        
+        space - O(n), time - O(m + n)
+    */
+    
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        List<ListNode> listOne = new ArrayList<>();
+        List<ListNode> listTwo = new ArrayList<>();
+        
+        ListNode currentA = headA;
+        while(currentA != null){
+            listOne.add(currentA);
+            currentA = currentA.next;
+        }
+        
+        ListNode currentB = headB;
+        while(currentB != null){
+            listTwo.add(currentB);
+            currentB = currentB.next;
+        }
+        
+        ListNode result = null;
+        int indexOne = listOne.size()-1;
+        int indexTwo = listTwo.size()-1;
+        while(indexOne != -1 && indexTwo != -1 && listOne.get(indexOne) == listTwo.get(indexTwo)){
+            result = listTwo.get(indexTwo);
+            indexTwo--;indexOne--;
+        }
+        
+        return result;
+
+    }
+}
+
+/*
+ Other Solutions : 
+
+ - Brute force : 
+        - take one from the beginning of either of the list and search for it in the other list, return the first matching node
+        - O(mn) where m and n are lengths of the lists
+
+ - Using HashMap : 
+        - Traverse through the linked list using headA, store all the node references in hashMap
+        - While traversing through the second linked list using headB, check whether the node is present in hashMap
+        - O(1) lookup, return the first matched node
+        - O(m) or O(n) space complexity, O(m+n) time complexity
+ 
+ - Two pointers :
+        - Place two pointers at the heads of the lists, increase them one by one simultaneously
+        - When they reach the end, redirect them to head
+        - If an intersection exists, they will point to the same node after n*m hops where n and m are lengths
+        - i.e is listA.length = m and listB.length = n, n hops should happen on listA and m on listB
+
+        - If the lists don't intersect : store the last element of the lists and compare both, if they don't match then no intersection
+
+        - O(m+n) hops where 
+
+
+*/

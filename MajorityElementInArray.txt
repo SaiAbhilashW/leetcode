@@ -1,0 +1,34 @@
+class Solution {
+    public int majorityElement(int[] nums) {
+        Map<Integer, Integer> myMap = new HashMap<>();
+
+
+        //1 Brute force - O(n2) time - find which element has max occurances
+
+        //2 Sorting - 
+        
+        //insertion of count of elements in the hash table
+        // return if currently mapped element has more than n/2 occurances
+        
+        for(int i = 0; i < nums.length;i++){
+            if(myMap.containsKey(nums[i])){
+                int count = myMap.get(nums[i]);
+                count++;
+                myMap.put(nums[i], count);
+                if(count > (nums.length / 2)) return nums[i];
+            } else {
+                myMap.put(nums[i],1);
+            }
+        }
+        return nums[0];
+    }
+}
+
+/* 
+
+    Other Solutions : 
+
+    - 
+    
+
+*/

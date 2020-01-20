@@ -1,0 +1,18 @@
+class Solution {
+    public int trailingZeroes(int n) {
+        //what makes 0s - 2*5 and 10s, find number of 5s in the factorial
+        if(n >= 5){
+            return n/5 + trailingZeroes(n/5);
+        } else return 0;
+    }
+}
+
+/*
+Explaination:
+	Just count the number of occurances of 5 in n! because no. of 2s will always be more than no. of 5s
+	answer would be suppose n = 15 then n/5 = 3, so 3 5s are available, so 3 0s would trail
+
+	result will be n/5 + n/25 + n/125 + .....
+	n/25 elements because if n = 25, n/5 would only take 5 5s but there are 6 because 25 = 5 * 5
+
+*/

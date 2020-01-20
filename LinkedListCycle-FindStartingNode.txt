@@ -1,0 +1,50 @@
+/**
+ * Definition for singly-linked list.
+ * class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) {
+ *         val = x;
+ *         next = null;
+ *     }
+ * }
+ */
+
+/*
+
+Find out which node is the nextNode of two nodes
+
+*/
+public class Solution {
+    public ListNode detectCycle(ListNode head) {
+        ListNode one;
+        one = head;
+        ListNode two;
+        two = head;
+        boolean cyclePresent = false;
+        
+        while(one != null && one.next != null && two.next != null && two.next.next != null ){
+            one = one.next;
+            two = two.next.next;
+            if(one == two){
+                cyclePresent = true;
+                break;
+            } 
+            System.out.println("one" + one.val + "-" + "two" + two.val);
+        }        
+       
+        if(cyclePresent){
+            ListNode node = head;
+            Map<ListNode, Integer> nodeCount = new HashMap<>();
+            while(!nodeCount.containsKey(node)){
+                nodeCount.put(node, 1);
+                node = node.next;
+            }
+            return node;
+        } else return null;
+        
+        
+    }
+}
+
+

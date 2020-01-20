@@ -1,0 +1,43 @@
+/**
+ * Definition for singly-linked list.
+ * class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) {
+ *         val = x;
+ *         next = null;
+ *     }
+ * }
+ */
+
+/**
+Approach : 
+declare two pointers, one will traverse every node, other will traverse every next node
+If they meet at the same node ever, Linked list has a cycle
+*/
+public class Solution {
+    public boolean hasCycle(ListNode head) {
+        ListNode one;
+        one = head;
+        ListNode two;
+        two = head;
+        boolean cyclePresent = false;
+        
+        while(one != null && one.next != null && two.next != null && two.next.next != null ){
+            one = one.next;
+            two = two.next.next;
+            if(one == two){
+                cyclePresent = true;
+                break;
+            } 
+            System.out.println("one" + one.val + "-" + "two" + two.val);
+        }
+        
+        return cyclePresent;
+    }
+}
+
+/*
+Learnings:
+for checking one.next.next = something, first check one != null, one.next != null otherwise you'll face null pointer exception
+*/
