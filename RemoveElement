@@ -1,0 +1,19 @@
+class Solution {
+    public int removeElement(int[] nums, int val) {
+        int newIndex = nums.length-1;
+        for(int i = 0; i <= newIndex;i++){
+            if(nums[i] == val){
+                if(nums[i] == nums[newIndex]){
+                    newIndex--;
+                    i--;
+                } else {
+                    int temp = nums[i];
+                    nums[i] = nums[newIndex];
+                    nums[newIndex] = temp;
+                    newIndex--;
+                }
+            }
+        }
+        return newIndex+1;
+    }
+}

@@ -1,0 +1,26 @@
+/* Length of last word
+ cases: 'hel lo world','world  ', '  ', 'wor ld ' etc
+
+*/
+
+
+
+class Solution {
+    public int lengthOfLastWord(String s) {
+        int count = 0;
+        char[] str = s.toCharArray();
+        int lastWordCount = 0;
+        for(int i = 0; i < str.length;i++){
+            if(str[i] == ' '){
+                if(count != 0){
+                    lastWordCount = count;
+                    count = 0;
+                } 
+            }
+            else if(i == str.length-1) lastWordCount = count+1;
+            else count++;
+        }
+        
+        return lastWordCount;
+    }
+}

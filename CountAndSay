@@ -1,0 +1,39 @@
+/*
+    Leetcode - 38 - https://leetcode.com/problems/count-and-say/
+    Count and Say
+
+    T(n) = O(n) + T(n-1) => n*O(n) + O(1) => O(n)
+*/
+
+class Solution {
+    public String countAndSay(int n) {
+        if(n == 1) return "1";
+        char[] current = countAndSay(n-1).toCharArray();
+        String result = "";
+        char repeatedDigit = current[0];
+        int count = 0;
+        for(int i = 0; i < current.length;i++){
+            if(current[i] == repeatedDigit){
+                if(i == current.length - 1){
+                    count++;
+                    return result + (Integer.toString(count) + repeatedDigit);
+                } 
+                else count++;
+            } 
+            else {
+                if(i == current.length - 1){
+                    result = result + (Integer.toString(count) + repeatedDigit);
+                    repeatedDigit = current[i];
+                    return result + "1" +  repeatedDigit;
+                }
+                else {
+                    result = result + (Integer.toString(count) + repeatedDigit);
+                    repeatedDigit = current[i];
+                    count = 1;
+                } 
+            }
+        }
+        
+        return result;
+    }
+}

@@ -1,0 +1,39 @@
+class Solution {
+    /*
+        question : 541 Reverse String || 
+        key takeaways :
+        
+        1. Strings are immutable in java, so convert them to char array and then perform reverse  operations otherwise a new string is created for every operation.
+        2. str.substring(beginIndex, endIndex) => (0,8) => gives a string with length 8 with last character as str[7].
+
+        Space - O(n), Time - O(logn + n) ?
+    */
+    
+    public String reverseTheString(String s){
+       char[] stringArray = new char[s.length()];
+       for(int i = 0; i < s.length();i++){
+           stringArray[i] = s.charAt(i);
+           System.out.println(stringArray[i]);
+       }
+       //reverse
+        int n = s.length();
+       for(int j = 0; j < n /2; j++){
+           char temp = stringArray[j];
+           stringArray[j] = stringArray[n-1-j];
+           stringArray[n-1-j] = temp;
+       }
+        
+        return new String(stringArray);
+    }
+    
+    public String reverseStr(String s, int k) {
+        if(s.length() <= k){
+            return reverseTheString(s);
+        }
+        else if(s.length() >= 2*k){
+            return reverseTheString(s.substring(0,k)) + s.substring(k,2*k) + reverseStr(s.substring(2*k),k);
+        } else {
+            return reverseTheString(s.substring(0,k)) + s.substring(k);
+        }
+    }
+}

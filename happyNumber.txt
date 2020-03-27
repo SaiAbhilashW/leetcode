@@ -1,0 +1,36 @@
+class Solution {
+    /* 
+    Write an algorithm to determine if a number is "happy".
+
+    A happy number is a number defined by the following process: Starting with any positive integer, replace the number by the sum of the squares of its digits, and repeat the process until the number equals 1 (where it will stay), or it loops endlessly in a cycle which does not include 1. Those numbers for which this process ends in 1 are happy numbers.
+
+
+       O(n) space where n is number of times we calculate and see if sum == 1, O(n) time
+       create a list which stores all the previous numbers, if there already exists a number in the list then it is a cycle then there is no happy number
+
+       O(1) space - Finding a cycle (Floyd Cycle detection algorithm) where one pointer runs twice as fast as the slower one
+
+                  - while(slow!=fast){
+                        slow = getSquaredSum(n);
+                        fast = getSquaredSum(n);
+                        fast = getSquaredSum(fast);
+                        if(slow == 1 || fast == 1) return true;
+                    } return false;
+    
+    */
+    
+    public List<Integer> numList = new ArrayList<>();
+    
+    public boolean isHappy(int n) {
+        int currentNum = n;
+        int result = 0;
+        if(this.numList.contains(currentNum)) return false;
+        else this.numList.add(currentNum);
+        while(currentNum!=0){
+            result = result + (currentNum%10)*(currentNum%10);
+            currentNum = currentNum/10;
+        }
+        if(result == 1) return true;
+        else return isHappy(result);
+    }
+}

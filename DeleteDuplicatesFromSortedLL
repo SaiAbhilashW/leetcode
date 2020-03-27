@@ -1,0 +1,23 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ * https://leetcode.com/problems/remove-duplicates-from-sorted-list/
+ * Given a sorted linked list delete all the repeated elements 
+ *
+ */
+class Solution {
+    public ListNode deleteDuplicates(ListNode head) {
+        ListNode current = head;
+        if(current == null) return null;
+        while(current.next!=null){
+            ListNode nextNode = current.next;
+            if(current.val == nextNode.val) current.next = nextNode.next;
+            else current = current.next;
+        }
+        return head;
+    }
+}
