@@ -1,0 +1,42 @@
+class Solution {
+    public int search(int[] nums, int target) {
+        /*
+            1. Find smallest number index
+            2. Find if target lies to left or right of smallest number
+            3. Search in logn in whichever subarray target lies in
+        */
+        
+        if(nums == null || nums.length == 0) return -1;
+        int left = 0;
+        int right = nums.length-1;
+        while(left < right){
+            int midpoint = left + (right - left)/2;
+            if(nums[midpoint] > nums[right]){
+                left = midpoint + 1;
+            } else {
+                right = right - 1;
+            }
+        }
+        int start = left;//or right, anything will do
+        
+        left = 0;
+        right = nums.length - 1;
+        
+        //decide on which part to apply binary search
+        if(target <= nums[right]){
+            //apply search on the right part
+            left = start;
+        } else {
+            right = start;
+        }
+        
+        while(left<=right){
+            int midpoint = left + (right-left)/2;
+            if(nums[midpoint] == target) return midpoint;
+            else if(nums[midpoint] > target) right = midpoint-1;
+            else left = midpoint+1;
+        }
+        
+        return -1;
+    }
+}

@@ -1,0 +1,31 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ *
+ *  Find the middle node in a linkedList, middle = n/2 + 1
+ *
+ *  Outtakes : 
+ *  1. Copy the list elements to array and give the middle element of the array - O(n) in space and time
+ *  2. Have two pointers, one twice as fast as the other, when one reaches the end, other is in the middle
+ */
+class Solution {
+    public ListNode middleNode(ListNode head) {
+        int length = 1;
+        ListNode current = head;
+        if(current == null) return current;
+        while(current.next != null){
+            current = current.next;
+            length++;
+        }
+        current = head;
+        int middleElement = (length/2) + 1;
+        for(int i = 1; i < middleElement; i++){
+            current = current.next;
+        }
+        return current;
+    }
+}

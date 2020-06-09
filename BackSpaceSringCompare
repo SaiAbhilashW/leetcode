@@ -1,0 +1,40 @@
+class Solution {
+    public boolean backspaceCompare(String S, String T) {
+        /*
+            Put it in stack, pop when # comes
+            At the end of string pop all and compare strings
+            
+            Iterate through the string in reverse. If we see a backspace character, the next non-backspace character is skipped. If a character isn't skipped, it is part of the final answer.
+        */
+        
+        Stack<Character> myStackForS = new Stack<>();
+        Stack<Character> myStackForT = new Stack<>();
+        
+        char[] charArrayForS = S.toCharArray();
+        char[] charArrayForT = T.toCharArray();
+        
+        for(int i = 0; i < charArrayForS.length; i++){
+            if(charArrayForS[i] == '#' && !myStackForS.isEmpty()){
+                 myStackForS.pop();
+            } else if(charArrayForS[i] != '#'){
+                 myStackForS.push(charArrayForS[i]);
+            }
+        }
+        
+        for(int i = 0; i < charArrayForT.length; i++){
+            if(charArrayForT[i] == '#' && !myStackForT.isEmpty()){
+                 myStackForT.pop();
+            } else if(charArrayForT[i] != '#'){
+                 myStackForT.push(charArrayForT[i]);
+            }
+        }
+        
+        if(myStackForS.size() != myStackForT.size()) return false;
+        else {
+            while(!myStackForS.isEmpty()){
+                if(myStackForS.pop() != myStackForT.pop()) return false;
+            }
+            return true;
+        }
+    }
+}

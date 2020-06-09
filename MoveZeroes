@@ -1,0 +1,38 @@
+/*
+    Question : 
+    Given an array nums, write a function to move all 0's to the end of it while maintaining the relative order of the non-zero elements.
+    e.g.
+    Input: [0,1,0,3,12]
+    Output: [1,3,12,0,0]
+*/
+
+class Solution {
+    public void moveZeroes(int[] nums) {
+        /* two pointer approach : 
+           Iterate over the array with one pointer
+           Set the second pointer as ptr1 + 1;
+           If nums[ptr1] == 0 then
+           Iterate ptr2 over the array to find a non zero number and swap
+           else ptr++
+            
+        */
+        int ptr2 = 1;
+        boolean flag = true;
+        for(int ptr1 = 0; ptr1 < nums.length; ptr1++){
+            ptr2 = ptr1 + 1;
+            if(nums[ptr1] == 0){
+                while(flag){
+                    if(ptr2 >= nums.length) flag = false;
+                    else if(nums[ptr2] != 0){
+                        int temp = nums[ptr1];
+                        nums[ptr1] = nums[ptr2];
+                        nums[ptr2] = temp;
+                        break;
+                    } else if(nums[ptr2] == 0) ptr2++;
+                }
+            }
+            if(!flag) break;
+        }
+    }
+}
+

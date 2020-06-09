@@ -1,0 +1,18 @@
+public void reverseMyList(ListNode head, ListNode tail){
+        if(head == tail){
+            head.next = null;
+            return;
+        }
+        ListNode temp = head;
+        while(temp.next != tail) temp = temp.next;
+        tail.next = temp;
+        reverseMyList(head, temp);
+    }
+    
+    public ListNode reverseList(ListNode head) {
+        if(head == null || head.next == null) return head;
+        ListNode tail = head;
+        while(tail.next != null) tail = tail.next;
+        reverseMyList(head, tail);
+        return tail;
+    }

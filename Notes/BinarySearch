@@ -1,0 +1,26 @@
+Template 1 :
+Initial Condition: left = 0, right = length-1
+Termination: left > right
+Searching Left: right = mid-1
+Searching Right: left = mid+1
+
+class Solution {
+    public int search(int[] nums, int target) {
+        if(nums == null || nums.length == 0)
+            return -1;
+        int right = nums.length -1;
+        int left = 0;
+        while(left <= right){
+            int midpoint = left + (right-left)/2;
+            if(nums[midpoint] == target){
+                return midpoint;
+            } else if(nums[midpoint] > target) right = midpoint-1;
+            else left = midpoint+1;
+        }
+        return -1;
+    }
+}
+
+--------------------------------
+
+Template 2 :

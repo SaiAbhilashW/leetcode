@@ -1,0 +1,38 @@
+class Solution {
+    public int[] productExceptSelf(int[] nums) {
+        /*
+        238. Product of Array Except Self
+        Make two arrays.
+        Array1 has product of all the elements to the left of nums[i]
+        Array2 has product of all the elements to the right of nums[i]
+        Take a product of both the corresponding elements from the arrays and return
+        
+        O(n) in space and time
+        
+        If you want to reduce the Space, use output array as left and calculate right         on the fly
+         */
+        
+        int[] left = new int[nums.length];
+        int[] right = new int[nums.length];
+        
+        //for left product
+        left[0] = 1; //product of elements to the left of nums[0] is 1
+        for(int i = 1; i < nums.length; i++){
+            left[i] = nums[i-1]*left[i-1];
+        }
+
+        //for right product
+        right[nums.length - 1] = 1; //product of elements to the right of nums[nums.length] is 1
+        for(int i = nums.length - 2; i >= 0 ; i--){
+            right[i] = nums[i+1]*right[i+1];
+        }
+        
+        int[] output = new int[nums.length];
+        
+        for(int i = 0; i < nums.length; i++){
+            output[i] = left[i]*right[i];
+        }
+        
+        return output;
+    }
+}
